@@ -1,0 +1,1 @@
+{"version":3,"file":"detection-config.d.ts","sourceRoot":"","sources":["../../src/shared/detection-config.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,eAAe,EAAE,SAAS,EAAE,QAAQ,EAAE,MAAM,iBAAiB,CAAC;AAG9F,wBAAgB,4BAA4B,CAC1C,QAAQ,EAAE,QAAQ,EAClB,SAAS,CAAC,EAAE,gBAAgB,GAC3B,gBAAgB,CAclB;AAED,wBAAgB,iBAAiB,CAC/B,IAAI,EAAE,eAAe,EACrB,OAAO,SAA+B,GACrC,SAAS,CAMX"}

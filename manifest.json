@@ -1,0 +1,103 @@
+{
+  "manifest_version": 3,
+  "name": "Sentinel Agent",
+  "version": "0.4.2",
+  "description": "Prototype privacy assistant for masking sensitive content before sending it to AI chat tools. Runs locally in the browser.",
+  "permissions": [
+    "storage",
+    "offscreen",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "http://127.0.0.1/*"
+    ]
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/network_sanitizer.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/dom_masker.js",
+        "build/settings_bridge.js",
+        "build/rehydrator.js",
+        "content/content-script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/document-redaction-prototype.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/clipboard-interceptor-page.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "options_page": "options/options.html",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/dark-16.png",
+      "32": "assets/icons/inactive-32.png",
+      "48": "assets/icons/dark-48.png",
+      "128": "assets/icons/dark-128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "wasm/*.wasm",
+        "assets/ocr/*",
+        "offscreen/offscreen.html",
+        "models/ner/bardsai-eu-pii-anonimization-multilang/*",
+        "models/ner/bardsai-eu-pii-anonimization-multilang/onnx/*",
+        "vendor/onnxruntime-web/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
+}

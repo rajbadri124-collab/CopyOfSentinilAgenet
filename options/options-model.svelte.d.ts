@@ -1,0 +1,50 @@
+import { type Writable } from 'svelte/store';
+import type { CancelDetectionBehavior, EntityType, GroupName, LocalAiUnloadTimeoutMs, ReplacementModeSetting, Settings, SystemCompatibilityStatus } from '../shared/message-types';
+import { type IdentityRecord, type IdentityVaultData, updateRecord } from '../shared/identity-vault';
+export type ListError = string | null;
+export type OptionsModel = {
+    settings: Writable<Settings | null>;
+    vaultData: Writable<IdentityVaultData>;
+    vaultRecords: Writable<IdentityRecord[]>;
+    allowlistError: Writable<ListError>;
+    blocklistError: Writable<ListError>;
+    systemCompatibility: Writable<SystemCompatibilityStatus | null>;
+    localAiWarmupState: Writable<'idle' | 'loading' | 'ready' | 'failed'>;
+    groupNames: readonly GroupName[];
+    setLocalAiDetection: (enabled: boolean) => Promise<void>;
+    retryLocalAi: () => Promise<void>;
+    rerunSystemCheck: () => Promise<void>;
+    setNerModelChoice: (value: string) => Promise<void>;
+    setLocalAiUnloadTimeoutMs: (value: LocalAiUnloadTimeoutMs) => Promise<void>;
+    setKeepLocalAiLoadedWhileActive: (enabled: boolean) => Promise<void>;
+    setAutoWarmLocalAiOnActiveSupportedPage: (enabled: boolean) => Promise<void>;
+    setSensitivityMode: (mode: Settings['sensitivityMode']) => Promise<void>;
+    setGlobalThreshold: (value: number) => Promise<void>;
+    setGroupThreshold: (group: GroupName, value: number) => Promise<void>;
+    addAllowlistEntry: (pattern: string) => Promise<boolean>;
+    removeAllowlistEntry: (index: number) => Promise<void>;
+    clearAllowlistError: () => void;
+    addBlocklistEntry: (pattern: string, scope: EntityType) => Promise<boolean>;
+    removeBlocklistEntry: (index: number) => Promise<void>;
+    updateBlocklistCategory: (index: number, scope: EntityType) => Promise<void>;
+    clearBlocklistError: () => void;
+    setVaultEnabled: (enabled: boolean) => Promise<void>;
+    setDefaultReplacementMode: (mode: ReplacementModeSetting) => Promise<void>;
+    updateVaultRecord: (id: string, patch: Parameters<typeof updateRecord>[2]) => Promise<void>;
+    deleteVaultRecord: (id: string) => Promise<void>;
+    exportVault: () => void;
+    importVault: (file: File) => Promise<{
+        imported: number;
+    } | {
+        error: string;
+    }>;
+    clearUnpinned: () => Promise<number>;
+    setCancelDetectionBehavior: (value: CancelDetectionBehavior) => Promise<void>;
+    setSkipCodeBlocks: (value: boolean) => Promise<void>;
+    setDebug: (value: boolean) => Promise<void>;
+    applyDebugSystemCheckScenario: (scenario: DebugSystemCheckScenario) => Promise<void>;
+    clearDebugSystemCheck: () => Promise<void>;
+};
+export type DebugSystemCheckScenario = 'ok-enabled' | 'warning-enabled' | 'unknown-enabled' | 'critical-auto-disabled' | 'critical-override' | 'cpu-fallback' | 'load-failure' | 'user-off';
+export declare function createOptionsModel(): OptionsModel;
+//# sourceMappingURL=options-model.svelte.d.ts.map

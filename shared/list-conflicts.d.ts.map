@@ -1,0 +1,1 @@
+{"version":3,"file":"list-conflicts.d.ts","sourceRoot":"","sources":["../../src/shared/list-conflicts.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,cAAc,EAAE,cAAc,EAAE,MAAM,iBAAiB,CAAC;AAEtE,KAAK,SAAS,GAAG,cAAc,GAAG,cAAc,CAAC;AAEjD,wBAAgB,oBAAoB,CAAC,OAAO,EAAE,MAAM,GAAG,MAAM,CAE5D;AAED,wBAAgB,sBAAsB,CAAC,OAAO,EAAE,MAAM,EAAE,OAAO,EAAE,SAAS,EAAE,GAAG,MAAM,GAAG,IAAI,CAI3F"}
